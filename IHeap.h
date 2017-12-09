@@ -6,4 +6,5 @@ public:
     virtual int GetMin() const = 0;
     virtual void ExtractMin() = 0;
     virtual void Meld(IHeap *other) = 0;
+    virtual ~IHeap() {}
 };
