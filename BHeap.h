@@ -1,4 +1,7 @@
+# ifndef IHEAP
+# define IHEAP
 # include "IHeap.h"
+# endif // IHEAP
 
 class BHeap : public IHeap
 {
