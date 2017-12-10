@@ -128,19 +128,16 @@ void TestTemplate()
 
 TEST(BinomialHeap, Operations)
 {
-    std::cout << 1 << "\n";
     TestTemplate<BHeap>();
 }
 
 TEST(LeftishHeap, Operations)
 {
-    std::cout << 2 << "\n";
     TestTemplate<LHeap>();
 }
 
 TEST(SkewHeap, Operations)
 {
-    std::cout << 3 << "\n";
     TestTemplate<SHeap>();
 }
 
