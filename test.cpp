@@ -3,7 +3,7 @@
 # include <algorithm>
 # include <ctime>
 # include "gtest/gtest.h"
-# include "BHeap.h"
+# include "BinomialHeap.h"
 # include "BaseHeap.h"
 # include "SillyHeap.h"
 
@@ -91,9 +91,11 @@ void TestTemplate()
             case ADDHEAP:
                 list.AddHeap(key);
                 slist.AddHeap(key);
+                break;
             case INSERT:
                 list.Insert(index, key);
                 slist.Insert(index, key);
+                break;
             case GETMIN:
             {
                 bool empty1 = slist.IsEmpty(index);
@@ -105,6 +107,7 @@ void TestTemplate()
                     int min2 = list.GetMin(index);
                     EXPECT_EQ(min1, min2);
                 }
+                break;
             }
             case EXTRACTMIN:
             {
@@ -116,11 +119,13 @@ void TestTemplate()
                     list.ExtractMin(index);
                     slist.ExtractMin(index);
                 }
+                break;
             }
             case MELD:
                 size_t index1 = rand() % list.size();
                 list.Meld(index, index1);
                 slist.Meld(index, index1);
+                break;
             }
         }
     }
@@ -128,22 +133,22 @@ void TestTemplate()
 
 TEST(BinomialHeap, Operations)
 {
-    TestTemplate<BHeap>();
+    TestTemplate<BinomialHeap>();
 }
 
 TEST(LeftishHeap, Operations)
 {
-    TestTemplate<LHeap>();
+    TestTemplate<LeftistHeap>();
 }
 
 TEST(SkewHeap, Operations)
 {
-    TestTemplate<SHeap>();
+    TestTemplate<SkewHeap>();
 }
 
 int main(int argc, char **argv)
 {
-    srand(time(NULL));
+    srand(time(nullptr));
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
