@@ -68,7 +68,7 @@ enum Operation
 template<typename Heap>
 void TestTemplate()
 {
-    const size_t OPERATIONS = 100000;
+    const size_t OPERATIONS = 1000;
     HeapList<SillyHeap> slist;
     HeapList<Heap> list;
     for (size_t i = 0; i < OPERATIONS; ++i)
@@ -128,6 +128,21 @@ void TestTemplate()
                 break;
             }
         }
+    }
+    list.AddHeap(rand());
+    list.AddHeap(rand());
+    for (size_t i = 0; i < OPERATIONS; i++)
+    {
+        list.Insert(0, rand());
+        list.Insert(1, rand());
+    }
+    list.Meld(0, 1);
+    int current = list.GetMin(0);
+    while (!list.IsEmpty(0))
+    {
+        EXPECT_LE(current, list.GetMin(0));
+        current = list.GetMin(0);
+        list.ExtractMin(0);
     }
 }
 
