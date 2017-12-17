@@ -18,7 +18,7 @@ struct SkewVertex
 struct LeftistVertex : public SkewVertex
 {
     size_t rk;
-    explicit LeftistVertex(const int &key) : key(key), left(nullptr), right(nullptr), rk(1) {}
+    explicit LeftistVertex(const int &key) : SkewVertex(key), rk(1) {}
     ~LeftistVertex()
     {
         delete left;
@@ -37,7 +37,7 @@ void update(LeftistVertex *v)
 {
     if (v == nullptr)
         return;
-    v->rk = std::min(get_rank(v->left), get_rank(v->right)) + 1;
+    v->rk = std::min(get_rank(dynamic_cast<SkewVertex>(v)->left), get_rank(dynamic_cast<SkewVertex>(v)->right)) + 1;
 }
 
 void merger(LeftistVertex *v)
