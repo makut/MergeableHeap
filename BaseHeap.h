@@ -3,12 +3,22 @@
 # include "IHeap.h"
 # endif // IHEAP
 
-struct LeftistVertex
+struct SkewVertex
 {
     int key;
+    SkewVertex *left, *right;
+    explicit SkewVertex(const int &key) : key(key), left(nullptr), right(nullptr) {}
+    ~SkewVertex()
+    {
+        delete left;
+        delete right;
+    }
+};
+
+struct LeftistVertex : public SkewVertex
+{
     size_t rk;
-    LeftistVertex *left, *right;
-    LeftistVertex(const int &key) : key(key), rk(1), left(nullptr), right(nullptr) {}
+    explicit LeftistVertex(const int &key) : key(key), left(nullptr), right(nullptr), rk(1) {}
     ~LeftistVertex()
     {
         delete left;
@@ -29,18 +39,6 @@ void update(LeftistVertex *v)
         return;
     v->rk = std::min(get_rank(v->left), get_rank(v->right)) + 1;
 }
-
-struct SkewVertex
-{
-    int key;
-    SkewVertex *left, *right;
-    SkewVertex(const int &key) : key(key), left(nullptr), right(nullptr) {}
-    ~SkewVertex()
-    {
-        delete left;
-        delete right;
-    }
-};
 
 void merger(LeftistVertex *v)
 {
